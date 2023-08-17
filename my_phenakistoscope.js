@@ -1,9 +1,9 @@
 const SLICE_COUNT = 10;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(ANIMATED_DISK); //OUTPUT_GIF(1000)
   pScope.scale_for_screen(true);
-  pScope.draw_layer_boundaries(true);
+  pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("Cat1","png");
@@ -11,35 +11,45 @@ function setup_pScope(pScope){
 
 function setup_layers(pScope){
 
-  new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
+  new PLayer(null, 255);  //background
 
-  var layer1 = new PLayer(Cat1);
-  layer1.mode( SWIRL(5) );
+  var layer1 = new PLayer(Cat1); //layer set up
+  layer1.mode( SWIRL(4) ); 
+  //SWIRL: how many times the picture happends in the distance part
+  //RING: back and forth in the area
   layer1.set_boundary( 200, 1000 );
 
-  //var layer2 = new PLayer(squares);
-  //layer2.mode( RING );
-  //layer2.set_boundary( 0, 400 );
+  var layer2 = new PLayer(squares);
+  layer2.mode( RING );
+  layer2.set_boundary( 200, 400 );
+
+  var layer3 = new PLayer(balls);
+  layer2.mode( SWIRL(1) );
+  layer2.set_boundary( 0, 200 );
 }
+
+//___________________________________________________________________________diving line
 
 function Cat1(x, y, animation, pScope){
-  scale(0.5);
-  pScope.draw_image("Cat1",x,y)
+  scale(0.3); //size
+  scale(animation.frame*2); //frame = size change
+  scale(animation .wave(2)); //wave: get to 0 (disappear) for how many times
+  Cat1x = animation.wave(); //wave(2)*100 = wriggling
+  pScope.draw_image("Cat1",Cat1x,y)
 }
 
-//___________________________________________________________________________
+//___________________________________________________________________________diving line
 
-function faces(x, y, animation, pScope){
+function balls(x, y, animation, pScope){
   
-  scale(animation.frame*2);
+  scale(animation.frame*2); 
 
-  ellipse(0,0,50,50); // draw head
-  fill(30);
-  ellipse(-10,-10,10,10); //draw eye
-  ellipse(10,-10,10,10); // draw eye
-  arc(0,10,20,10,0,180); // draw mouth
+  fill(138,43,226);
+  ellipse(0,100,50,50); // ball
 
 }
+
+//___________________________________________________________________________diving line
 
 function squares(x, y, animation, pScope){
 
@@ -48,10 +58,10 @@ function squares(x, y, animation, pScope){
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
-  fill(66, 135, 245)
+  fill(255);
   arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
 
-  fill(255)
+  fill(0)
   rect(-10,-300-animation.wave()*50,20,20) // .wave is a cosine wave btw
 
 }
