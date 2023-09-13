@@ -1,7 +1,9 @@
 const SLICE_COUNT = 10;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK); //OUTPUT_GIF(1000) ; ANIMATED_DISK
+  pScope.output_mode(ANIMATED_DISK); 
+  // pScope.output_mode(OUTPUT_GIF(1000)); 
+  // pScope.output_mode(OUTPUT_PRINT(A3));
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
@@ -40,16 +42,19 @@ function setup_layers(pScope){
 //___________________________________________________________________________diving line
 
 function bkgrd(x, y, animation, pScope){
-  pScope.fill_background(0);
-  fill(50);
+  pScope.fill_background(227,207,87);
+  fill(255,153,18);
   ellipse(0,0,1800,1800);
-  fill(80);
-  ellipse(0,0,1600,1600);
-  fill(100);
-  ellipse(0,0,1550,1550);
-
+  fill(255,200,9);
+  ellipse(0,0,1780,1780);
+  // fill(176,48,96);
+  // ellipse(0,0,1600,1600);
+  // fill(210,105,30);
+  // ellipse(0,0,1570,1570);
+  fill(245,222,175);
+  ellipse(0,0,1500,1500);//1550
   fill(178,34,34);
-  ellipse(0,0,800,800);
+  ellipse(0,0,500,500);//800
 }
 
 function Cat(x, y, animation, pScope){
